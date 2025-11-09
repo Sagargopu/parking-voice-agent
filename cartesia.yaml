@@ -1,0 +1,23 @@
+name: parking-voice-agent
+runtime: python3.11
+
+# Build configuration
+build:
+  installCommand: pip install -r requirements.txt
+
+# Run configuration
+run:
+  startCommand: uvicorn app.main:app --host 0.0.0.0 --port 8000
+
+# Environment variables (do not include secrets here)
+env:
+  DATABASE_URL: sqlite:///./voice_agent.db
+  PARKING_DATABASE_URL: sqlite:///./parking.db
+  LOT_NAME: RapidPark-A
+  LOT_CAPACITY: "50"
+  RATE_CENTS_PER_HOUR: "400"
+
+# Health check
+healthCheck:
+  path: /
+  port: 8000
